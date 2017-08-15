@@ -1,7 +1,11 @@
 import React from "react";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Card } from "react-native-elements";
 import { API_KEY } from "./secret";
+
+import Testing from "./components/testing/testing";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -34,7 +38,7 @@ export default class App extends React.Component {
         imageUrl = article.urlToImage;
       }
       return (
-        <Card key={index} image={article.urlToImage}>
+        <Card key={index} image={{ uri: article.urlToImage }}>
           <Text>
             {article.title}
           </Text>
@@ -42,12 +46,12 @@ export default class App extends React.Component {
       );
     });
     return (
-      <ScrollView>
-        <Text>Butts stuff hom</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-        {cards}
-      </ScrollView>
+      <Provider store={store}>
+        <ScrollView>
+          <Testing />
+          {cards}
+        </ScrollView>
+      </Provider>
     );
   }
 }
