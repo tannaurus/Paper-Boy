@@ -1,16 +1,37 @@
-import { TO_TESTING, SET_STORIES } from "./actions";
+import {
+  SET_STORIES,
+  SET_HEADLINES,
+  SET_PUBLICATIONS,
+  HANDLE_LOADING,
+  HANDLE_REFRESH
+} from "./actions";
 
 const initialState = {
-  testing: true,
-  stories: []
+  loading: false,
+  refresh: false,
+  headlines: [],
+  stories: [],
+  publications: []
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case TO_TESTING:
-      return Object.assign({}, state, { testing: false });
     case SET_STORIES:
-      return Object.assign({}, state, { stories: action.stories });
+      return Object.assign({}, state, {
+        stories: action.stories,
+        loading: false
+      });
+    case HANDLE_REFRESH:
+      return Object.assign({}, state, { refresh: !state.refresh });
+    case HANDLE_LOADING:
+      return Object.assign({}, state, { loading: true });
+    case SET_HEADLINES:
+      return Object.assign({}, state, { headlines: action.headlines });
+    case SET_PUBLICATIONS:
+      return Object.assign({}, state, {
+        publications: action.publications,
+        loading: false
+      });
     default:
       return state;
   }

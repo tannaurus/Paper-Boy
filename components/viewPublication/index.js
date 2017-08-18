@@ -1,37 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  Text,
-  ScrollView,
   TouchableOpacity,
-  Linking,
+  Text,
   View,
+  ScrollView,
   StyleSheet
 } from "react-native";
 import { Card } from "react-native-elements";
 
-//components
-import { Nav } from "../nav";
+import Nav from "../nav";
 
-//actions
-import { fetchNews, fetchHeadlines, handleRefresh } from "../../redux/actions";
-
-export class Stories extends React.Component {
-  componentDidMount() {
-    if (this.props.stories.length === 0) {
-      this.props.dispatch(fetchNews("the-verge"));
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.refresh !== this.props.refresh && this.props.refresh) {
-      this.props.dispatch(fetchNews("cnn"));
-      this.props.dispatch(handleRefresh());
-    }
-  }
-
+export class viewPublication extends React.Component {
   render() {
-    console.log("reloaded.", this.props.refresh);
     const renderedStories = this.props.stories.map((story, index) => {
       return (
         <TouchableOpacity
@@ -52,9 +33,10 @@ export class Stories extends React.Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <ScrollView style={styles.contentContainer}>
+        <ScrollView>
           {renderedStories}
         </ScrollView>
+        <Nav />
       </View>
     );
   }
@@ -71,17 +53,11 @@ const styles = StyleSheet.create({
   desc: {
     fontSize: 18,
     paddingBottom: 4
-  },
-  contentContainer: {
-    // flex: 1,
-    // justityContent: "center"
   }
 });
 
 const mapStateToProps = (state, actions) => ({
-  stories: state.stories,
-  refresh: state.refresh,
-  state: state
+  stories: state.stories
 });
 
-export default connect(mapStateToProps)(Stories);
+export default connect(mapStateToProps)(viewPublication);
