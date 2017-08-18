@@ -11,7 +11,7 @@ As a user, I can tap the refresh icon on the navigation bar and have the current
 
 # Images
 ### The home page
-![Home page](http://i.imgur.com/cTDgKHH.jpg)
+![Home page](http://i.imgur.com/XBD0OK9.jpg)
 ### The loading page
 ![Loading page](http://i.imgur.com/6yxiVNA.jpg)
 ### The page containing all of the publications the user can view
