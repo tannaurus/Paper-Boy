@@ -5,7 +5,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Linking
+  Linking,
+  StyleSheet
 } from "react-native";
 import { Card } from "react-native-elements";
 
@@ -52,6 +53,12 @@ export class Headlines extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  text: {
+    width: "50%"
+  }
+});
 
 const mapStateToProps = (state, props) => ({
   headlines: state.headlines,
