@@ -11,6 +11,8 @@ const initialState = {
   refresh: false,
   headlines: [],
   stories: [],
+  currentPublicationName: "CNN",
+  currentPublication: null,
   publications: []
 };
 
@@ -18,6 +20,8 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_STORIES:
       return Object.assign({}, state, {
+        currentPublication: action.publication.publicationId,
+        currentPublicationName: action.publication.publication,
         stories: action.stories,
         loading: false
       });

@@ -46,9 +46,8 @@ export class Nav extends React.Component {
 const styles = StyleSheet.create({
   nav: {
     height: 66,
-    borderTopWidth: 5,
-    borderTopColor: "grey",
-    backgroundColor: "#6C8EAD",
+    paddingTop: 7,
+    backgroundColor: "#2c3e50",
     flexDirection: "row",
     justifyContent: "space-around"
   },

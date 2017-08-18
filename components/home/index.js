@@ -25,7 +25,9 @@ export class Home extends React.Component {
         <ScrollView style={styles.body}>
           <Text style={styles.headlines}>Headlines</Text>
           <Headlines />
-          <Text style={styles.headlines}>Stories</Text>
+          <Text style={styles.headlines}>
+            Stories from {this.props.publicationName}
+          </Text>
           <Stories />
         </ScrollView>
         <Nav />
@@ -50,12 +52,13 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     paddingTop: 5,
     paddingBottom: 10,
-    backgroundColor: "#144955"
+    backgroundColor: "#e74c3c"
   }
 });
 
 const mapStateToProps = (state, props) => ({
-  loading: state.loading
+  loading: state.loading,
+  publicationName: state.currentPublicationName
 });
 
 export default connect(mapStateToProps)(Home);

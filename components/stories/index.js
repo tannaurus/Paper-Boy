@@ -19,19 +19,24 @@ import { fetchNews, fetchHeadlines, handleRefresh } from "../../redux/actions";
 export class Stories extends React.Component {
   componentDidMount() {
     if (this.props.stories.length === 0) {
-      this.props.dispatch(fetchNews("the-verge"));
+      this.props.dispatch(fetchNews("the-verge", "The Verge"));
     }
   }
 
   componentDidUpdate(prevProps) {
+    console.log(this.props.publication);
     if (prevProps.refresh !== this.props.refresh && this.props.refresh) {
-      this.props.dispatch(fetchNews("cnn"));
+      this.props.dispatch(
+        fetchNews(
+          this.props.publication || "cnn",
+          this.props.publicationName || "CNN"
+        )
+      );
       this.props.dispatch(handleRefresh());
     }
   }
 
   render() {
-    console.log("reloaded.", this.props.refresh);
     const renderedStories = this.props.stories.map((story, index) => {
       return (
         <TouchableOpacity
@@ -44,6 +49,9 @@ export class Stories extends React.Component {
             </Text>
             <Text style={styles.desc}>
               {story.description}
+            </Text>
+            <Text style={styles.publicationName}>
+              {this.props.publicationName}
             </Text>
           </Card>
         </TouchableOpacity>
@@ -72,6 +80,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingBottom: 4
   },
+  publicationName: {
+    textAlign: "right",
+    fontSize: 15,
+    color: "grey"
+  },
   contentContainer: {
     // flex: 1,
     // justityContent: "center"
@@ -81,6 +94,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state, actions) => ({
   stories: state.stories,
   refresh: state.refresh,
+  publication: state.currentPublication,
+  publicationName: state.currentPublicationName,
   state: state
 });
 

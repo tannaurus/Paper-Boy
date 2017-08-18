@@ -8,7 +8,7 @@ import { Actions } from "react-native-router-flux";
 import { fetchPublications, fetchNews } from "../../redux/actions";
 
 //components
-import { Nav } from "../nav";
+import Nav from "../nav";
 
 export class Publications extends React.Component {
   componentDidMount() {
@@ -26,8 +26,7 @@ export class Publications extends React.Component {
             roundAvatar
             title={publication.name}
             onPress={() => {
-              console.log(publication.id);
-              this.props.dispatch(fetchNews(publication.id));
+              this.props.dispatch(fetchNews(publication.id, publication.name));
               return Actions.viewPublication();
             }}
           />

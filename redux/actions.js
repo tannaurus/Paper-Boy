@@ -11,9 +11,10 @@ export const handleRefresh = () => ({
 });
 
 export const SET_STORIES = "SET_STORIES";
-export const setStories = stories => ({
+export const setStories = (stories, publication) => ({
   type: SET_STORIES,
-  stories
+  stories,
+  publication
 });
 
 export const SET_HEADLINES = "SET_HEADLINES";
@@ -47,10 +48,10 @@ export const fetchHeadlines = () => dispatch => {
     });
 };
 
-export const fetchNews = publication => dispatch => {
+export const fetchNews = (publicationId, publication) => dispatch => {
   dispatch(handleLoading());
   fetch(
-    `https://newsapi.org/v1/articles?source=${publication}&apiKey=${API_KEY}`
+    `https://newsapi.org/v1/articles?source=${publicationId}&apiKey=${API_KEY}`
   )
     .then(response => {
       if (!response.ok) {
@@ -60,7 +61,7 @@ export const fetchNews = publication => dispatch => {
       return response.json();
     })
     .then(json => {
-      dispatch(setStories(json.articles));
+      dispatch(setStories(json.articles, { publication, publicationId }));
     })
     .catch(err => {
       console.error(err);
